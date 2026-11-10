@@ -18,11 +18,9 @@ Diegimas į Azure App Service su bendru React ir Spring Boot JAR aprašytas [Azu
 
 ## Reikalavimai
 
-- Java 21 (IntelliJ gali naudoti atsisiųstą JDK 21).
-- Docker Desktop.
+- Java 21.
+- Docker.
 - Node.js 22+ ir npm.
-
-Maven atskirai diegti nereikia – `backend` kataloge yra Maven Wrapper.
 
 ## Paleidimas lokaliai
 
@@ -113,22 +111,3 @@ Visi API keliai prasideda `/api/v1`:
 - `/auth/register`, `/auth/login`, `/auth/refresh`, `/auth/logout`, `/auth/me` – autentifikacija.
 
 Pilną vykdomą metodų rinkinį rasite [Postman kolekcijoje](postman/PC-Builder.postman_collection.json).
-
-## Render diegimas
-
-`render.yaml` aprašo Docker backend, statinį frontend ir PostgreSQL Frankfurto regione. Kuriant Blueprint reikia įvesti dvi `sync: false` reikšmes:
-
-- `APP_ALLOWED_ORIGIN` – pilnas frontend origin, pvz. `https://pc-builder-web.onrender.com`;
-- `VITE_API_BASE_URL` – pilnas API prefiksas, pvz. `https://pc-builder-api.onrender.com/api/v1`.
-
-`JWT_SECRET` Render nustatykite rankiniu būdu: naudokite aukščiau aprašytu būdu sugeneruotą Base64 paslaptį. Produkcijoje refresh slapukas nustatytas kaip `Secure; SameSite=None`.
-
-## Projekto struktūra
-
-```text
-backend/   Spring Boot API, migracijos ir testai
-frontend/  React/Vite SPA ir testai
-postman/   API kolekcija bei lokali aplinka
-compose.yaml
-render.yaml
-```
